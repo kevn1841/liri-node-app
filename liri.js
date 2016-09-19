@@ -101,6 +101,18 @@ if(firstArg == "my-tweets"){
     console.log('\n'+'Rotten Tomatoes Rating: ' + movData.tomatoRating);
 	console.log('\n'+'Rotton Tomatoes URL: ' + movData.tomatoURL);
 }else if(firstArg == "do-what-it-says"){
+	fs.readFile("random.txt", "utf8", function(error, data) {
+		console.log(data);
+		
+		var dataArr = data.split(',')
+
+		if (dataArr.length == 2){
+			pick(dataArr[0], dataArr[1]);
+		}else if (dataArr.length == 1){
+			pick(dataArr[0]);
+		}
+		
+	});
 }else{
 	console.log("not a valid argument")
 
