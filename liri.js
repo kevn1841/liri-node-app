@@ -31,7 +31,35 @@ if(firstArg == "my-tweets"){
 	  }
 	});	
 }else if(firstArg == "spotify-this-song"){
+	var songName;
+		if(sixthArg != undefined){
+			songName = secondArg + "-" + thirdArg + "-" + fourthArg + "-" + fifthArg + "-" + sixthArg;
+		}else if(fifthArg != undefined){
+			songName = secondArg + "-" + thirdArg + "-" + fourthArg + "-" + fifthArg;
+		}else if(fourthArg != undefined){
+			songName = secondArg + "-" + thirdArg + "-" + fourthArg;
+		}else if(thirdArg != undefined){
+			songName = secondArg + "-" + thirdArg;
+		}else if(secondArg != undefined){
+			songName = secondArg;
+		}
+	spotify.search({ type: 'track', query: songName }, function(err, data) {
+	    if ( err ) {
+	        console.log('Error occurred: ' + err);
+	        return;
+	    }else if(songName == undefined){
+	    	songName = 'What\'s my age again';
+	    }
+	    var songs = data.tracks.items;
 
+	    for(var i = 0; i < songs.length; i++){
+	    	console.log('\n'+i);
+	    	console.log('\nartist(s): ' + songs[i].artists);
+	    	console.log('\nsong name: ' + songs[i].name);
+	    	console.log('\npreview song: ' + songs[i].preview_url);
+	    	console.log('\nalbum: ' + songs[i].album.name);
+	    }
+	});
 }else if(firstArg == "movie-this"){
 	// if(firstArg == ""){
 	// 	movieArg = secondArg;
